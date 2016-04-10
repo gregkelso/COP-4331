@@ -49,8 +49,8 @@ public class PieSliceSensor : Sensor {
 
         //Draw visual debug lines if enabled
 		if (debug) {
-			Debug.DrawRay (obj.transform.position, a * radius, Color.black);
-			Debug.DrawRay (obj.transform.position, c * radius, Color.black);
+			//Debug.DrawRay (obj.transform.position, a * radius, Color.black);
+			//Debug.DrawRay (obj.transform.position, c * radius, Color.black);
 		}
 
         //Return number of enemies in pie slice
