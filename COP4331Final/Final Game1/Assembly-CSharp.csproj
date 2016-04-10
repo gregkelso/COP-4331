@@ -45,8 +45,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Resources\MainMenu\Scripts\MainMenu.cs" />
-     <Compile Include="Assets\Resources\MainMenu\Scripts\UIControl.cs" />
      <Compile Include="Assets\Resources\Scripts\Behaviors\CollisionAvoidance.cs" />
      <Compile Include="Assets\Resources\Scripts\Behaviors\Path.cs" />
      <Compile Include="Assets\Resources\Scripts\Behaviors\PathFinder.cs" />
@@ -55,6 +53,7 @@
      <Compile Include="Assets\Resources\Scripts\Controllers\Controller.cs" />
      <Compile Include="Assets\Resources\Scripts\Controllers\EnemyController.cs" />
      <Compile Include="Assets\Resources\Scripts\Controllers\PlayerController.cs" />
+     <Compile Include="Assets\Resources\Scripts\Controllers\UIController.cs" />
      <Compile Include="Assets\Resources\Scripts\DataStructures\Grid.cs" />
      <Compile Include="Assets\Resources\Scripts\DataStructures\GridNode.cs" />
      <Compile Include="Assets\Resources\Scripts\DataStructures\Heap.cs" />

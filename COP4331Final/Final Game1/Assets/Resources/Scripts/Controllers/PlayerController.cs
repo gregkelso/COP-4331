@@ -6,6 +6,7 @@ public class PlayerController : Controller {
     //PRIVATE
 
     //PUBLIC
+	public int health = 100;
     
     //Initialize controller and parent
     protected override void Start() {
