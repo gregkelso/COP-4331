@@ -60,7 +60,6 @@
      <Compile Include="Assets\Resources\Scripts\DataStructures\Point.cs" />
      <Compile Include="Assets\Resources\Scripts\Generators\BorderGenerator.cs" />
      <Compile Include="Assets\Resources\Scripts\Manager\LevelManager.cs" />
-     <Compile Include="Assets\Resources\Scripts\SceneManager.cs" />
      <Compile Include="Assets\Resources\Scripts\Sensors\AdjacentAgentSensor.cs" />
      <Compile Include="Assets\Resources\Scripts\Sensors\PieSliceSensor.cs" />
      <Compile Include="Assets\Resources\Scripts\Sensors\RayCaster.cs" />
