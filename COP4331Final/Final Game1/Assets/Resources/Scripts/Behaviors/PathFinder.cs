@@ -20,10 +20,11 @@ public class PathFinder {
         //Convert 3D Positions to GridNodes
         GridNode startNode = grid.getNode(startPos);
         GridNode targetNode = grid.getNode(targetPos);
-
         //Exit if nodes are out of bounds
         if (startNode == null || targetNode == null)
+        {
             return null;
+        }
 
         //Instantiate Open and Closed set DataStructures for A* Algorithm
         HashSet<GridNode> closedSet = new HashSet<GridNode>();
@@ -40,7 +41,6 @@ public class PathFinder {
             if(currentNode == targetNode) {
                 //Retrace and get coordinates
                 List<GridNode> points = retracePath(startNode, targetNode);
-
                 //Convert to a path
                 return getPath(points);
             }
@@ -49,7 +49,9 @@ public class PathFinder {
             foreach(GridNode neighbor in grid.GetNeighbors(currentNode)) {
                 //Skip node if not walkable or already used
                 if (!neighbor.isWalkable() || closedSet.Contains(neighbor))
+                {
                     continue;
+                }
 
                 //Calculate the move cost to the neighbor nodes
                 int moveCost = currentNode.gCost + GridNode.getDistance(currentNode, neighbor);
@@ -67,7 +69,6 @@ public class PathFinder {
                 }
             }
         }
-
         //Unable to find a path
         return null;
     }

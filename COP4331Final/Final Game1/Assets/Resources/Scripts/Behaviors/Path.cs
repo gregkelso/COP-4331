@@ -55,9 +55,9 @@ public class Path {
             //Return point at top of queue
             return path.Peek();
         }
-        catch(Exception) {
+        catch(Exception e) {
             //Only occurs when path is empty
-            throw new Exception();
+            throw e;
         }
     }
 

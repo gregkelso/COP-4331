@@ -14,19 +14,47 @@ public class Seek : MonoBehaviour {
     public PathFinder pathFinder; //Calculate path from start to goal
     public Path path; //Store a path created from path finder or manually placed points
 
+    private GameObject followTarget;
+
     // Use this for initialization
     void Start () {    
         controller = GetComponent<Controller>(); //Obtain agent controller for movement
-        LayerMask mask = 1 << 9 | 1 << 10; //Consider obstacles non-traversable
+        LayerMask mask = 1 << 9; //Consider obstacles non-traversable
         pathFinder = new PathFinder(20, mask); //Initialize PathFinder
         targetSet = false; //A target hasn't been selected
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        checkInput(); //Handle User input
+        //checkInput(); //Handle User input
+        follow();
         pathFinder.getGrid().generate(); //Regenerate grid
         seek(); //Seek target destination based on path selected
+    }
+
+    public void activate(GameObject followTarget)
+    {
+        this.followTarget = followTarget;
+    }
+
+    private void follow()
+    {
+        if(!targetSet && followTarget != null)
+        {
+            
+            //Delete path if one exists
+            if (path != null)
+                path.Destroy();
+
+            //Set mouse click as target destination and generate path 
+            path = pathFinder.findPath(transform.position, followTarget.transform.position);
+            //Set parent object if path is available
+            if (path != null)
+                path.pathObj.transform.parent = transform;
+
+            //Disable target till next tick
+            targetSet = false;
+        }
     }
 
     //Check for and process user input
@@ -80,14 +108,16 @@ public class Seek : MonoBehaviour {
     private void seek() {
         //Check if a path exists and that a target is chosen
         if(targetSet && path != null) {
-            //Only seek if not at destination
+            //Only seek if not at destination\
             if (!arrived()) {
                 //Continue seeking target
                 controller.setHeading(target); //Face target
                 controller.moveForward(); //Move to target
+                Debug.Log("Going " + target.x);
             }
             else {
                 try {
+                    Debug.Log("arrived");
                     //Arrived at target           
                     path.nextNode(); //Discard node 
                     targetSet = false; //Disable target till next tick
@@ -102,6 +132,7 @@ public class Seek : MonoBehaviour {
             try {
                 //NOT USING PATH NODE SENSOR
                 //Peek at next node, but don't remove so line is drawn
+                path.nextNode();
                 target = path.peek();
 
                 //Using path node sensor to find nearest waypoint
@@ -109,9 +140,11 @@ public class Seek : MonoBehaviour {
 
                 targetSet = true; //Re-engage target settings
             }
-            catch (Exception) {
+            catch (Exception e) {
                 //Occurs when no waypoints are nearby
                 //DO NOTHING
+
+                Debug.Log("got exveption" + e);
             }
         }
     }

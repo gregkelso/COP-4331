@@ -117,4 +117,20 @@ public class Controller : MonoBehaviour {
         //Return Relative angle
         return relativeHeading;
     }
+
+    public void moveHorizontal(float horizontal)
+    {
+        transform.Translate(new Vector2(horizontal * movementSpeed * Time.deltaTime, 0));
+    }
+
+    public void moveVertical(float vertical)
+    {
+        transform.Translate(new Vector2(0, vertical * movementSpeed * Time.deltaTime));
+    }
+
+    public void moveTowards(GameObject obj)
+    {
+        Vector3 direction = (obj.transform.position - transform.position).normalized;
+        transform.Translate(direction * movementSpeed * Time.deltaTime);
+    }
 }
