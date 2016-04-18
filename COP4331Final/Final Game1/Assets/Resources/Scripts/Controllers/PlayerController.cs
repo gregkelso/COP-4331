@@ -1,16 +1,22 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 //Basic player controller
 public class PlayerController : Controller {
     //Global Variables
+    
     //PRIVATE
+    private int health;
 
     //PUBLIC
     public int speed = 3;
+    public Text healthText;
     
     //Initialize controller and parent
     protected override void Start() {
         base.Start();
+        health = 100;
+        healthText.text = "Health: " + health.ToString();
     }
 
     //Update is called once per frame
