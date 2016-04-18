@@ -18,4 +18,9 @@ public class detect : MonoBehaviour {
         if (coll.gameObject.tag == "Player")
             gameObject.transform.parent.GetComponent<EnemyController>().onDetect(coll.gameObject);
     }
+    void OnTriggerExit2D(Collider2D coll)
+    {
+        if (coll.gameObject.tag == "Player")
+            gameObject.transform.parent.GetComponent<EnemyController>().onExit();
+    }
 }

@@ -23,28 +23,29 @@ public class PlayerController : Controller {
     //Process keyboard input
 	void processInput() {
         //Up Arrow
-		//if (Input.GetKey(KeyCode.UpArrow)) 
-  //          moveForward();
 
-  //      //Down Arrow
-		//if (Input.GetKey(KeyCode.DownArrow)) 
-  //          moveBackward();
+        if (Input.GetKey(KeyCode.UpArrow))
+            moveForward();
 
-  //      //Left Arrow
-  //      if (Input.GetKey(KeyCode.LeftArrow))
-  //          rotateLeft();
+        //Down Arrow
+        if (Input.GetKey(KeyCode.DownArrow))
+            moveBackward();
 
-  //      //Right Arrow
-  //      if (Input.GetKey(KeyCode.RightArrow)) 
-  //          rotateRight();
+        //Left Arrow
+        if (Input.GetKey(KeyCode.LeftArrow))
+            rotateLeft();
 
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-        if (horizontal != 0)
-            moveHorizontal(horizontal);
+        //Right Arrow
+        if (Input.GetKey(KeyCode.RightArrow))
+            rotateRight();
 
-        if (vertical != 0)
-            moveVertical(vertical);
+        //float horizontal = Input.GetAxis("Horizontal");
+        //float vertical = Input.GetAxis("Vertical");
+        //if (horizontal != 0)
+        //    moveHorizontal(horizontal);
+
+        //if (vertical != 0)
+        //    moveVertical(vertical);
 
 
 

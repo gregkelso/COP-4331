@@ -31,8 +31,10 @@ public class PathFinder {
         Heap<GridNode> openSet = new Heap<GridNode>(grid.MaxSize);        
         openSet.Add(startNode); //Add start node to the open set
 
+        int count = 0;
+
         //Iterate through as long as openset is not empty
-        while(openSet.Count > 0) {
+        while(openSet.Count > 0 && count++ < 50) {
             //Store first node in collection 
             GridNode currentNode = openSet.RemoveFirst();
             closedSet.Add(currentNode);

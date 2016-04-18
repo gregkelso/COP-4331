@@ -9,6 +9,7 @@ public class Seek : MonoBehaviour {
     //PUBLIC
     public bool debug; //Displays grid debug
     public bool targetSet; //While true, agent is currently seeking to destination
+    public bool isBig;
     public float arrivalRadius = 50; //How close to target till considered arrived at target
     public Vector3 target; //Specific Target node to face and move to
     public PathFinder pathFinder; //Calculate path from start to goal
@@ -18,7 +19,7 @@ public class Seek : MonoBehaviour {
 
     // Use this for initialization
     void Start () {    
-        controller = GetComponent<Controller>(); //Obtain agent controller for movement
+        controller = GetComponent<EnemyController>(); //Obtain agent controller for movement
         LayerMask mask = 1 << 9; //Consider obstacles non-traversable
         pathFinder = new PathFinder(20, mask); //Initialize PathFinder
         targetSet = false; //A target hasn't been selected
@@ -35,6 +36,11 @@ public class Seek : MonoBehaviour {
     public void activate(GameObject followTarget)
     {
         this.followTarget = followTarget;
+    }
+
+    public void deactivate(GameObject followTarget)
+    {
+        this.followTarget = null;
     }
 
     private void follow()
@@ -111,13 +117,12 @@ public class Seek : MonoBehaviour {
             //Only seek if not at destination\
             if (!arrived()) {
                 //Continue seeking target
-                controller.setHeading(target); //Face target
+                if(!isBig)
+                    controller.setHeading(target); //Face target
                 controller.moveForward(); //Move to target
-                Debug.Log("Going " + target.x);
             }
             else {
                 try {
-                    Debug.Log("arrived");
                     //Arrived at target           
                     path.nextNode(); //Discard node 
                     targetSet = false; //Disable target till next tick
@@ -133,7 +138,16 @@ public class Seek : MonoBehaviour {
                 //NOT USING PATH NODE SENSOR
                 //Peek at next node, but don't remove so line is drawn
                 path.nextNode();
-                target = path.peek();
+                if(isBig)
+                {
+                    path.nextNode();
+                    path.nextNode();
+                    target = path.peek();
+                    controller.setHeading(target); //Face target
+                }
+                else
+                    target = path.peek();
+
 
                 //Using path node sensor to find nearest waypoint
                 //target = findClosestWayPoint().transform.position;
@@ -143,8 +157,7 @@ public class Seek : MonoBehaviour {
             catch (Exception e) {
                 //Occurs when no waypoints are nearby
                 //DO NOTHING
-
-                Debug.Log("got exveption" + e);
+                
             }
         }
     }
