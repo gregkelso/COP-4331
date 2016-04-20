@@ -10,7 +10,10 @@ public class PlayerController : Controller {
     private int health;
 
     //PUBLIC
+	public bool limitRateOfFire = true;
     public int speed = 3;
+	public float fireRate = 1;
+	public float time = 0;
     public Text healthText;
     private GameObject energyPrefab;
 
@@ -34,6 +37,8 @@ public class PlayerController : Controller {
 	void processInput() {
         //Up Arrow
 
+		time += Time.deltaTime;
+
         if (Input.GetKey(KeyCode.UpArrow))
             moveForward();
 
@@ -50,8 +55,17 @@ public class PlayerController : Controller {
             rotateRight();
 
         //Right Arrow
-        if (Input.GetKeyDown(KeyCode.Space))
-            attack();
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			// Delay the fire rate
+			if (limitRateOfFire) {
+				if (time > fireRate) {
+					attack ();
+					time = 0;
+				}
+			} else {
+				attack();
+			}
+		}
 
         //float horizontal = Input.GetAxis("Horizontal");
         //float vertical = Input.GetAxis("Vertical");
@@ -72,4 +86,14 @@ public class PlayerController : Controller {
         lightning.transform.rotation = transform.rotation;
         lightning.transform.Translate(new Vector3(0, 50, 0));
     }
+
+	void OnCollisionEnter2D(Collision2D coll)
+	{
+		if (coll.gameObject.CompareTag("Laplace"))
+		{
+			limitRateOfFire = false;
+			coll.gameObject.SetActive (false);
+		}
+
+	}
 }
