@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 //Basic player controller
@@ -11,12 +12,15 @@ public class PlayerController : Controller {
     //PUBLIC
     public int speed = 3;
     public Text healthText;
-    
+    private GameObject energyPrefab;
+
     //Initialize controller and parent
     protected override void Start() {
         base.Start();
         health = 100;
-        healthText.text = "Health: " + health.ToString();
+        //healthText.text = "Health: " + health.ToString();
+
+        energyPrefab = Resources.Load("Prefabs/energyball") as GameObject;
     }
 
     //Update is called once per frame
@@ -45,6 +49,10 @@ public class PlayerController : Controller {
         if (Input.GetKey(KeyCode.RightArrow))
             rotateRight();
 
+        //Right Arrow
+        if (Input.GetKeyDown(KeyCode.Space))
+            attack();
+
         //float horizontal = Input.GetAxis("Horizontal");
         //float vertical = Input.GetAxis("Vertical");
         //if (horizontal != 0)
@@ -55,5 +63,13 @@ public class PlayerController : Controller {
 
 
 
+    }
+
+    private void attack()
+    {
+        GameObject lightning = MonoBehaviour.Instantiate(energyPrefab) as GameObject;
+        lightning.transform.position = transform.position;
+        lightning.transform.rotation = transform.rotation;
+        lightning.transform.Translate(new Vector3(0, 50, 0));
     }
 }

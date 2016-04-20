@@ -14,23 +14,28 @@ public class Seek : MonoBehaviour {
     public Vector3 target; //Specific Target node to face and move to
     public PathFinder pathFinder; //Calculate path from start to goal
     public Path path; //Store a path created from path finder or manually placed points
+    public int steps;
 
     private GameObject followTarget;
 
     // Use this for initialization
     void Start () {    
         controller = GetComponent<EnemyController>(); //Obtain agent controller for movement
-        LayerMask mask = 1 << 9; //Consider obstacles non-traversable
-        pathFinder = new PathFinder(20, mask); //Initialize PathFinder
+        pathFinder = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>().getPathFinder();
+        
         targetSet = false; //A target hasn't been selected
 	}
 	
 	// Update is called once per frame
 	void Update () {
         //checkInput(); //Handle User input
-        follow();
-        pathFinder.getGrid().generate(); //Regenerate grid
-        seek(); //Seek target destination based on path selected
+        if (pathFinder == null)
+            pathFinder = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>().getPathFinder();
+        else {
+            follow();
+
+            seek(); //Seek target destination based on path selected
+        }
     }
 
     public void activate(GameObject followTarget)
@@ -53,7 +58,7 @@ public class Seek : MonoBehaviour {
                 path.Destroy();
 
             //Set mouse click as target destination and generate path 
-            path = pathFinder.findPath(transform.position, followTarget.transform.position);
+            path = pathFinder.findPath(transform.position, followTarget.transform.position, steps);
             //Set parent object if path is available
             if (path != null)
                 path.pathObj.transform.parent = transform;
@@ -72,7 +77,7 @@ public class Seek : MonoBehaviour {
                 path.Destroy();
 
             //Set mouse click as target destination and generate path 
-            path = pathFinder.findPath(transform.position, getMouseCoordinates());
+            path = pathFinder.findPath(transform.position, getMouseCoordinates(), steps);
 
             //Set parent object if path is available
             if(path != null)
@@ -140,6 +145,7 @@ public class Seek : MonoBehaviour {
                 path.nextNode();
                 if(isBig)
                 {
+                    path.nextNode();
                     path.nextNode();
                     path.nextNode();
                     target = path.peek();

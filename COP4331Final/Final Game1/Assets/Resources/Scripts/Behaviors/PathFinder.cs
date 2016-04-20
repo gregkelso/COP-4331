@@ -16,7 +16,7 @@ public class PathFinder {
     }
 
     //Generate path from start to destination using A*
-    public Path findPath(Vector3 startPos, Vector3 targetPos) {
+    public Path findPath(Vector3 startPos, Vector3 targetPos, int steps) {
         //Convert 3D Positions to GridNodes
         GridNode startNode = grid.getNode(startPos);
         GridNode targetNode = grid.getNode(targetPos);
@@ -34,7 +34,7 @@ public class PathFinder {
         int count = 0;
 
         //Iterate through as long as openset is not empty
-        while(openSet.Count > 0 && count++ < 50) {
+        while(openSet.Count > 0 && count++ < steps) {
             //Store first node in collection 
             GridNode currentNode = openSet.RemoveFirst();
             closedSet.Add(currentNode);

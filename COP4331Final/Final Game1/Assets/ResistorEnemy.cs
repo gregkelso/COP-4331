@@ -14,6 +14,7 @@ public class ResistorEnemy : EnemyController
         detected = false;
         //Cache Waypoint prefab
         lightningPrefab = Resources.Load("Prefabs/lightning") as GameObject;
+        rb.mass = 4;
     }
 
     //Update is called once per frame

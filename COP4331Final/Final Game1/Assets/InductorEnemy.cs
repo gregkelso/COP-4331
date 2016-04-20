@@ -20,7 +20,7 @@ public class InductorEnemy : EnemyController {
     protected override void Update()
     {
         base.Update(); //Call parent update
-
+        
         if (detected)
         {
             //moveForward(500);
@@ -36,7 +36,7 @@ public class InductorEnemy : EnemyController {
         GetComponent<Seek>().activate(player);
     }
 
-    void OnCollisionEnter2D(Collision2D coll)
+    void OnTriggerEnter2D(Collider2D coll)
     {
         if (coll.gameObject.tag == "Player")
         {
@@ -54,6 +54,7 @@ public class InductorEnemy : EnemyController {
             lightning.transform.rotation = transform.rotation;
             //wp.transform.parent = obj.transform;
             lightning.transform.parent = transform;
+            
         }
 
     }
@@ -63,6 +64,8 @@ public class InductorEnemy : EnemyController {
         base.onExit();
         detected = false;
         GetComponent<Seek>().deactivate(player);
+        
 
     }
+    
 }

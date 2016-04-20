@@ -58,12 +58,20 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\BossEnemy.cs" />
     <Compile Include="Assets\InductorEnemy.cs" />
+    <Compile Include="Assets\LightningAttack.cs" />
     <Compile Include="Assets\ResistorEnemy.cs" />
     <Compile Include="Assets\Resources\Scripts\Behaviors\CollisionAvoidance.cs" />
     <Compile Include="Assets\Resources\Scripts\Behaviors\Path.cs" />
@@ -86,7 +94,10 @@
     <Compile Include="Assets\Resources\Scripts\Sensors\Sensor.cs" />
     <Compile Include="Assets\destroyAfterTIme.cs" />
     <Compile Include="Assets\detect.cs" />
+    <Compile Include="Assets\energyballE.cs" />
+    <Compile Include="Assets\energyballP.cs" />
     <Compile Include="Assets\teleport.cs" />
+    <Compile Include="Assets\towerEnemy.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
