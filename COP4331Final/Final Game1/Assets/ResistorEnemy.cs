@@ -15,6 +15,7 @@ public class ResistorEnemy : EnemyController
         //Cache Waypoint prefab
         lightningPrefab = Resources.Load("Prefabs/lightning") as GameObject;
         rb.mass = 4;
+        health = 100;
     }
 
     //Update is called once per frame
@@ -42,6 +43,12 @@ public class ResistorEnemy : EnemyController
         {
             attack();
         }
+        else if (coll.gameObject.tag == "lightningballP")
+        {
+            Debug.Log("Hit" + health);
+            health -= 51;
+        }
+        
 
     }
 

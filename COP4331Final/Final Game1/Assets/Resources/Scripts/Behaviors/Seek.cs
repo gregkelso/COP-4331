@@ -148,6 +148,7 @@ public class Seek : MonoBehaviour {
                     path.nextNode();
                     path.nextNode();
                     path.nextNode();
+                    path.nextNode();
                     target = path.peek();
                     controller.setHeading(target); //Face target
                 }

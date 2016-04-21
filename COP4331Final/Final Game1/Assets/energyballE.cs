@@ -22,6 +22,7 @@ public class energyballE : MonoBehaviour {
         {
             //attackEnemy()
             Destroy(gameObject);
+            coll.gameObject.GetComponent<PlayerController>().hitByLightningBall();
         }
 
     }

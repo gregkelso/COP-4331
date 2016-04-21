@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LightningAttack : MonoBehaviour {
+public class LightningRingAttack : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -17,8 +17,7 @@ public class LightningAttack : MonoBehaviour {
     {
         if (coll.gameObject.tag == "Player")
         {
-            //attackEnemy()
-            coll.gameObject.GetComponent<PlayerController>().hitByLightningStrike();
+            coll.gameObject.GetComponent<PlayerController>().hitByLightningRing();
         }
 
     }

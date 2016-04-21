@@ -20,6 +20,7 @@ public class towerEnemy : EnemyController {
         //Cache Waypoint prefab
         lightningPrefab = Resources.Load("Prefabs/energyballE") as GameObject;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        health = 200;
     }
 
     //Update is called once per frame
@@ -38,7 +39,6 @@ public class towerEnemy : EnemyController {
 
     public override void onDetect(GameObject player)
     {
-        Debug.Log("detected");
         detected = true;
     }
 
@@ -79,6 +79,19 @@ public class towerEnemy : EnemyController {
     {
         base.onExit();
         detected = false;
+
+    }
+
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+
+        if (coll.gameObject.tag == "lightningballP")
+        {
+
+            health -= 51;
+            Destroy(coll.gameObject);
+        }
+
 
     }
 }

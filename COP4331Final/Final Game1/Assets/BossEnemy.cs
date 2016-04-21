@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class BossEnemy : EnemyController
 {
@@ -20,12 +21,15 @@ public class BossEnemy : EnemyController
         lightningPrefab = Resources.Load("Prefabs/lightningBoss") as GameObject;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         count = 1;
+        health = 500;
 
     }
 
     //Update is called once per frame
     protected override void Update()
     {
+        if (health < 0)
+            SceneManager.LoadScene("WinScene");
         base.Update(); //Call parent update
 
         
@@ -41,7 +45,6 @@ public class BossEnemy : EnemyController
 
     public override void onDetect(GameObject player)
     {
-        Debug.Log("detected");
         detected = true;
     }
 
@@ -75,6 +78,19 @@ public class BossEnemy : EnemyController
                 lightning2.transform.Rotate(new Vector3(0, 0, 270));
                 break;
         }
+
+    }
+
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+        
+        if (coll.gameObject.tag == "lightningballP")
+        {
+
+            health -= 51;
+            Destroy(coll.gameObject);
+        }
+
 
     }
 

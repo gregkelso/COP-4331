@@ -58,12 +58,6 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
@@ -72,6 +66,7 @@
     <Compile Include="Assets\BossEnemy.cs" />
     <Compile Include="Assets\InductorEnemy.cs" />
     <Compile Include="Assets\LightningAttack.cs" />
+    <Compile Include="Assets\LightningRingAttack.cs" />
     <Compile Include="Assets\ResistorEnemy.cs" />
     <Compile Include="Assets\Resources\Scripts\Behaviors\CollisionAvoidance.cs" />
     <Compile Include="Assets\Resources\Scripts\Behaviors\Path.cs" />

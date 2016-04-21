@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 //Basic player controller
 public class PlayerController : Controller {
@@ -21,7 +22,7 @@ public class PlayerController : Controller {
     protected override void Start() {
         base.Start();
         health = 100;
-        //healthText.text = "Health: " + health.ToString();
+        healthText.text = "Health: " + health.ToString();
 
         energyPrefab = Resources.Load("Prefabs/energyball") as GameObject;
     }
@@ -29,7 +30,9 @@ public class PlayerController : Controller {
     //Update is called once per frame
     protected override void Update () {
 		processInput(); //Process Keyboard Input
-
+        healthText.text = "Health: " + health.ToString();
+        if(health < 0)
+            SceneManager.LoadScene("DeathScene");
         base.Update(); //Call parent update
     }
 
@@ -94,6 +97,38 @@ public class PlayerController : Controller {
 			limitRateOfFire = false;
 			coll.gameObject.SetActive (false);
 		}
+        
 
-	}
+        else if (coll.gameObject.tag == "lightningboltE")
+        {
+            health -= 1;
+        }
+        else if (coll.gameObject.tag == "lightningringE")
+        {
+            health -= 10;
+        }
+        else if (coll.gameObject.tag == "lightningballE")
+        {
+            
+        }
+
+
+    }
+
+    public void hitByLightningBall()
+    {
+        health -= 2;
+    }
+
+    public void hitByLightningRing()
+    {
+        health -= 10;
+    }
+
+    public void hitByLightningStrike()
+    {
+        health -= 20;
+    }
+
+
 }

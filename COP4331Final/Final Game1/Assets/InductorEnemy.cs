@@ -14,6 +14,7 @@ public class InductorEnemy : EnemyController {
         detected = false;
         //Cache Waypoint prefab
         lightningPrefab = Resources.Load("Prefabs/lightningring") as GameObject;
+        health = 800;
     }
 
     //Update is called once per frame
@@ -23,24 +24,28 @@ public class InductorEnemy : EnemyController {
         
         if (detected)
         {
-            //moveForward(500);
+            
         }
     }
 
 
     public override void onDetect(GameObject player)
     {
-        Debug.Log("detected");
         detected = true;
         this.player = player;
         GetComponent<Seek>().activate(player);
     }
 
-    void OnTriggerEnter2D(Collider2D coll)
+    void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.tag == "Player")
         {
             attack();
+        }
+        else if (coll.gameObject.tag == "lightningballP")
+        {
+            health -= 51;
+            Destroy(coll.gameObject);
         }
 
     }
@@ -49,6 +54,7 @@ public class InductorEnemy : EnemyController {
     {
         if (transform.childCount == 2)
         {
+            Debug.Log("Got hit3");
             GameObject lightning = MonoBehaviour.Instantiate(lightningPrefab) as GameObject;
             lightning.transform.position = transform.position;
             lightning.transform.rotation = transform.rotation;
