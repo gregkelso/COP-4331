@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 //Basic player controller
 public class PlayerController : Controller {
@@ -9,6 +10,7 @@ public class PlayerController : Controller {
     
     //PRIVATE
     private int health;
+	private GameObject MainCamera;
 
     //PUBLIC
 	public bool limitRateOfFire = true;
@@ -17,6 +19,7 @@ public class PlayerController : Controller {
 	public float time = 0;
     public Text healthText;
     private GameObject energyPrefab;
+	public AudioClip clip;
 
     //Initialize controller and parent
     protected override void Start() {
@@ -25,6 +28,8 @@ public class PlayerController : Controller {
         healthText.text = "Health: " + health.ToString();
 
         energyPrefab = Resources.Load("Prefabs/energyball") as GameObject;
+
+		MainCamera = GameObject.FindWithTag ("MainCamera");
     }
 
     //Update is called once per frame
@@ -96,6 +101,12 @@ public class PlayerController : Controller {
 		{
 			limitRateOfFire = false;
 			coll.gameObject.SetActive (false);
+
+			MainCamera.GetComponent<AudioSource> ().Stop ();
+
+			MainCamera.GetComponent<AudioSource> ().clip = clip;
+
+			MainCamera.GetComponent<AudioSource> ().Play ();
 		}
         
 
