@@ -105,7 +105,7 @@ public class PlayerController : Controller {
 			MainCamera.GetComponent<AudioSource> ().Stop ();
 
 			MainCamera.GetComponent<AudioSource> ().clip = clip;
-
+			MainCamera.GetComponent<AudioSource> ().volume = 0.5f;
 			MainCamera.GetComponent<AudioSource> ().Play ();
 		}
         

@@ -28,7 +28,6 @@ public class UIController : MonoBehaviour {
 		if (!paused) {
 			PauseUI.SetActive (false);
 			Time.timeScale = 1;
-			//MainCamera.GetComponent<AudioSource> ().Play ();
 		}
 	}
 
@@ -45,6 +44,4 @@ public class UIController : MonoBehaviour {
 	public void QuitGame() {
 		Application.Quit ();
 	}
-
-
 }
